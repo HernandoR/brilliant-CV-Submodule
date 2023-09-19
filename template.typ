@@ -330,6 +330,8 @@
     return if logo == "" [] else {image(path, width: 100%)}
   }
   v(beforeEntrySkip)
+  let A1Content=ifSocietyFirst(varEntrySocietyFirst, society, title)
+  let B1Content=ifSocietyFirst(varEntrySocietyFirst, title, society)
   table(
     columns: (ifLogo(logo, 4%, 0%), 1fr),
     inset: 0pt,
@@ -343,10 +345,10 @@
       stroke: none,
       row-gutter: 6pt,
       align: auto,
-      {entryA1Style(ifSocietyFirst(varEntrySocietyFirst, society, title))},
+      {entryA1Style(A1Content)},
       {entryA2Style(date)},
-      {entryB1Style(ifSocietyFirst(varEntrySocietyFirst, title, society))},
-      {entryB2Style(location)},
+      if (B1Content != "Title" and B1Content != "Society"){entryB1Style(B1Content)},
+      if location != "Location" {entryB2Style(location)},
     )
   )
   entryDescriptionStyle(description)
